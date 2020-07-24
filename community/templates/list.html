@@ -1,0 +1,17 @@
+ <!DOCTYPE html>
+ {% load static %}
+ <html lang="en">
+ <head>
+ 	<meta charset="UTF-8">
+ 	<title>list</title>
+ 	<link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+</head>
+<body>
+	<ul>
+		<li> 제목 | 저자 | 날짜</li>
+	{% for article in articleList %} <!-- articleList를 받아서 리스트의 필드를 하나씩 가져옴 -->
+		<li><a href="/view/{{article.id}}">{{ article.title }}</a> | {{ article.name }} | {{ article.cdate|date:"D d M Y" }}</li>
+	{% endfor %}
+	</ul>
+</body>
+</html>

@@ -1,0 +1,17 @@
+ <!DOCTYPE html>
+ {% load static %}
+ <html lang="en">
+ <head>
+ 	<meta charset="UTF-8">
+ 	<title>write</title>
+ 	<link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+</head>
+<body>
+	<form action = "" method="post">
+		{{ form.as_p }}
+		{% csrf_token %} <!-- django의 보안용 token인 csrf token을 생성해서 전달 -->
+		<button type="submit" class="btn btn-primary">저장</button>
+	</form>
+
+</body>
+</html>

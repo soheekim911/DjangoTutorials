@@ -1,0 +1,38 @@
+ <!DOCTYPE html>
+ {% load static %}
+ <html lang="en">
+ <head>
+ 	<meta charset="UTF-8">
+ 	<title>ajax demo1</title>
+ 	<link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+</head>
+<body>
+	<p>time : <span id="time"></span></p>
+	<input type="button" id="execute" value="execute" />
+	<script>
+	document.querySelector('input').addEventListener('click', function(event){
+	    var xhr = new XMLHttpRequest();
+	    xhr.open('GET', './time.php');
+	    xhr.onreadystatechange = function(){
+	        if(xhr.readyState === 4 && xhr.status === 200){
+	            document.querySelector('#time').innerHTML = xhr.responseText;
+	        }
+	    }
+
+	    xhr.send(); 
+	}); 
+	</script> 
+</body>
+</html>
+
+<!-- xhr.open 의 인자로 들어가는 GET은 서버랑 통신할 때 'GET' 방식으로 통신하고, 서버와 통신하는 서버쪽 URL은 ./time.php(현재 html 파일과 같은 디렉토리에 있어서 ./)
+
+form을 쓰면 페이지가 reload되는데, 그것에 대한 대안- 페이지를 reload하지 않으면서 서버와 데이터 주고받기 -이 ajax. 따라서 전달하는 인자는 거의 비슷함. 
+xhr.open("GET", "./time.php")를 form 태그를 이용해서 다시 써보면 다음과 같음
+<form method='GET' action='./time.php'>
+
+xhr.send();는 send라는 메소드가 호출될 때 위에서 정의한 XMLHttpRequest 객체인 'xhr'가 './time.php'라는 주소로 'GET' 방식으로 통신을 시작하게 됨
+
+onreadystatechange : 서버와의 통신 단계마다 호출되는 이벤트 핸들러. 헤더를 전송 받았다. 전송 중이다. 응답 완료되었다 등의 상태를 알려줌. 대부분의 경우에 가장 중요한 건 '통신이 끝났다'이기 때문에 그 부분만 구현하는 경우가 많음.
+readyState: 모든 통신이 완료됐다.
+status === 200: 호출 결과가 성공함. 404는 Not Found고. -->
